@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="test.js"></script>
+    <style>
+        .completed{
+            text-decoration: line-through;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <main ng-app="taskList" ng-controller="TaskController as Ctrl">
+       <h1>Task Manager</h1>
+        <form name="form" ng-submit="Ctrl.addTask()">
+            <div>
+                <input type="text" name="task" placeholder="Add a new task" ng-model="Ctrl.newTask">
+                <button ng-disabled="form.$invalid">Add Task</button>
+            </div>
+        </form>
+        <ul>
+            <li ng-repeat="task in Ctrl.tasks" ng-class="{'completed':task.done}">
+                <span>{{task.title}}
+                <input type="checkbox" ng-model="task.done" ng-attr="{{task.done}}" ng-attr-id="{{'task-'+$index}}">
+                <label ng-attr-for="{{'tasks-'+$index}}"></label>
+                </span>
+            </li>
+        </ul>
+        <button ng-click="Ctrl.clearCompleted()">Clear completed tasks</button>
+    </main>
+</body>
+
+</html>
